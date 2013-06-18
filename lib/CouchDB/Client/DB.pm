@@ -97,6 +97,15 @@ sub replicate {
 	return $res->{json};
 }
 
+sub compact {
+	my $self = shift;
+	my %args = @_;
+
+	my $res = $self->{client}->req('POST', $self->uriName . '/_compact', {});
+	confess("Error compacting database: $res->{msg}") if $res->{status} >= 300;
+    return $res->{json};
+}
+
 sub newDoc {
 	my $self = shift;
 	my $id = shift;
